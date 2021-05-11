@@ -8,7 +8,7 @@ class PostsController < ApplicationController
     end
 
     def new
-      load_categories
+      #load_categories
       @post = Post.new
     end
     
@@ -19,7 +19,7 @@ class PostsController < ApplicationController
     end
 
     def edit
-      load_categories
+      #load_categories
       load_post
     end
 
@@ -44,7 +44,7 @@ class PostsController < ApplicationController
       @post = Post.find(params[:id])
     end
 
-    def load_categories
-      @categories = Category.all
-    end
+    #def load_categories
+     # @categories = Category.all
+    #end
 end
