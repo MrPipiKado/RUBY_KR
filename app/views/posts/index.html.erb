@@ -1,4 +1,11 @@
-<h1>ALL POSTS</h1>
+<h1>
+    <%= @category&.name || "ALL" %> posts
+</h1>
+
+<% if @category %>
+  <%= link_to "ALL post", posts_path %>
+<% end %>
+
 <%= link_to "Create new post", new_post_path %>
 <div class="posts-container">
   <% @posts.each do |post| %>  
@@ -7,7 +14,8 @@
       <%= link_to post do %>
         <h3> <%= post.title %> </h3>
       <% end %>
-      <p><%= post.category.name %></p>
+      <!-- <p><%= post.category.name %></p> -->
+      <%= link_to post.category.name, category_posts_path(post.category)%>
       <p><%= post.created_at %></p>
       <p><%= post.text %></p>
     </div>
