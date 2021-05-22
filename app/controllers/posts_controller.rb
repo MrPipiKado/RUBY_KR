@@ -3,10 +3,10 @@ class PostsController < ApplicationController
       
       if params[:category_id]
         @category = Category.find(params[:category_id])
-        @posts = @category.posts.ordered.with_categories
+        @posts = @category.posts.ordered.with_categories.paginate(page: params[:page], per_page: 2)
       end
       
-      @posts ||= Post.all.ordered.with_categories
+      @posts ||= Post.with_categories.paginate(page: params[:page], per_page: 2)
     end
 
     def show 

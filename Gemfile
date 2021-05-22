@@ -9,6 +9,7 @@ gem 'rails', '~> 6.0.3', '>= 6.0.3.6'
 #gem 'sqlite3', '~> 1.4'
 gem 'pg', '~>1.1.3'
 gem 'aws-sdk'
+gem 'will_paginate', '~> 3.3.0'
 # Use Puma as the app server
 gem 'puma', '~> 4.1'
 # Use SCSS for stylesheets
