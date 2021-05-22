@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: database
+spec:
+  selector:
+    matchLabels:
+      app: database
+  serviceName: database
+  template:
+    metadata:
+      labels:
+        app: database
+    spec:
+      containers:
+      - image: postgres:12.1
+        name: database
+        env:
+        - name: PGDATA
+          value: /var/lib/postgresql/data/pgdata
+        - name: POSTGRES_NAME
+          valueFrom:
+            secretKeyRef:
+              name: database-secret
+              key: POSTGRES_NAME
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: database-secret
+              key: POSTGRES_PASSWORD
+        - name: POSTGRES_USER
+          valueFrom:
+            secretKeyRef:
+              name: database-secret
+              key: POSTGRES_USER
+        ports:
+        - containerPort: 5432
+          name: database
+        volumeMounts:
+        - name: db-persistent-storage
+          mountPath: /var/lib/postgresql/data
+        - name: db-conf
+          mountPath: /docker-entrypoint-initdb.d
+      restartPolicy: Always
+      serviceAccountName: ""
+      volumes:
+      - name: db-conf
+        configMap:
+          name: db-config
+      - name: db-persistent-storage
+        persistentVolumeClaim:
+          claimName: db-pvc

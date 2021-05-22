@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: db-config
+data:
+  init.sql: |
+    CREATE USER very_lol_kek_user;
+    ALTER USER very_lol_kek_user WITH SUPERUSER;

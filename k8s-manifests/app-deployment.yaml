@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: app
+    tier: app
+  name: app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      tier: app
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        tier: app
+    spec:
+      containers:
+      - name: app
+        image: mrpipikado/ruby_kr:latest
+        ports:
+        - containerPort: 3000
+        env:
+        - name: DATABASE_HOST
+          value: database
+        - name: RAILS_ENV
+          value: development
+        - name: DATABASE_NAME
+          valueFrom:
+            secretKeyRef:
+              name: database-secret
+              key: DATABASE_NAME
+        - name: DATABASE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: database-secret
+              key: DATABASE_PASSWORD
+        - name: DATABASE_USER
+          valueFrom:
+            secretKeyRef:
+              name: database-secret
+              key: DATABASE_USER
+      initContainers:
+      - name: init-database
+        image: busybox
+        command: ['sh', '-c', 'until nslookup database; do echo waiting for mysql; sleep 2; done;']    
+      restartPolicy: Always
