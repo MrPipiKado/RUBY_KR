@@ -1,0 +1,1 @@
+Post.create(title: 'First post', text: 'First post', category_id: 1)
