@@ -19,10 +19,6 @@ ActiveRecord::Schema.define(version: 2021_05_09_144151) do
     t.string "name"
   end
 
-  create_table "cathegories", force: :cascade do |t|
-    t.string "name"
-  end
-
   create_table "posts", force: :cascade do |t|
     t.string "title"
     t.text "text"
