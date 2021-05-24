@@ -13,7 +13,7 @@
 ![6](./screenshots/6.png)
 ![7](./screenshots/7.png)
 ![9](./screenshots/9.png)
-## Kubernetes deployment in minikube (one of app pods is not initialised on screenshot, but it got ready in a few minutes (bad side of local deployment, everything is slow))
+## Kubernetes deployment in minikube (one of app pods is not initialized on screenshot, but it got ready in a few minutes (bad side of local deployment, everything is slow))
 ![10](./screenshots/10.png)
 ![11](./screenshots/11.png)
 
