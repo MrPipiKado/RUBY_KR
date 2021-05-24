@@ -28,5 +28,12 @@ ActiveRecord::Schema.define(version: 2021_05_09_144151) do
     t.index ["category_id"], name: "index_posts_on_category_id"
   end
 
+  create_table "uploads", force: :cascade do |t|
+    t.string "url"
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   add_foreign_key "posts", "categories"
 end
